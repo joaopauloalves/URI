@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void main(void)
+{
+	double area, pi, raio;
+	
+	scanf("%lf", &raio);
+	
+	pi= 3.14159;
+	
+	area= (raio* raio)* pi;
+	printf("A=%.4lf\n", area);
+
+
+}
