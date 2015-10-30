@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+ 
+//Programa que executa divisoes de numeros racionais 
+ 
+typedef struct { int numerador, denominador; } TRac;
+ 
+TRac somaRac(TRac p1, TRac p2)
+{   TRac resultado;
+ 
+    resultado.numerador = p1.numerador * p2.denominador 
+                        + p2.numerador * p1.denominador;
+    resultado.denominador = p1.denominador * p2.denominador;
+     
+    return resultado;
+}
+ 
+TRac subtraiRac(TRac p1, TRac p2)
+{   TRac resultado;
+ 
+    resultado.numerador = p1.numerador * p2.denominador 
+                        - p2.numerador * p1.denominador;
+    resultado.denominador = p1.denominador * p2.denominador;
+     
+    return resultado;
+}
+ 
+TRac multiplicaRac(TRac p1, TRac p2)
+{
+    TRac resultado;
+     
+    resultado.numerador = p1.numerador * p2.numerador;
+    resultado.denominador = p1.denominador * p2.denominador;
+     
+    return resultado;
+}
+ 
+TRac divideRac(TRac p1, TRac p2)
+{
+    TRac resultado;
+     
+    resultado.numerador = p1.numerador * p2.denominador;
+    resultado.denominador = p2.numerador * p1.denominador;
+     
+    return resultado;
+}
+ 
+int mdc(int m, int n)
+{   if(m < 0) m = -m;
+    if(n < 0) n = -n;
+ 
+    if(m % n == 0)
+        return n;
+    else
+        return mdc(n, m % n);
+}
+ 
+TRac simplificaRac(TRac v)
+{   TRac resultado;
+ 
+    resultado.numerador = v.numerador / mdc(v.numerador, v.denominador);
+    resultado.denominador = v.denominador / mdc(v.numerador, v.denominador);
+     
+    return resultado;
+}
+ 
+int main()
+{   TRac v1, v2, resultado;
+    char Operando;
+    int cont, N;
+     
+    scanf("%d", &N);
+ 
+    for(cont = 0; cont < N; cont++)
+    {
+        scanf("%d / %d %c %d / %d", &v1.numerador, &v1.denominador, &Operando,
+                         &v2.numerador, &v2.denominador);
+                          
+        if(Operando == '+')
+        {
+            resultado = somaRac(v1, v2);
+            printf("%d/%d = ", resultado.numerador, resultado.denominador);
+            resultado = simplificaRac(resultado);
+            printf("%d/%d\n", resultado.numerador, resultado.denominador);
+        }
+        else
+            if(Operando == '-')
+        {
+            resultado = subtraiRac(v1, v2);
+            printf("%d/%d = ", resultado.numerador, resultado.denominador);
+            resultado = simplificaRac(resultado);
+            printf("%d/%d\n", resultado.numerador, resultado.denominador);
+        }
+        else
+            if(Operando == '*')
+        {
+            resultado = multiplicaRac(v1, v2);
+            printf("%d/%d = ", resultado.numerador, resultado.denominador);
+            resultado = simplificaRac(resultado);
+            printf("%d/%d\n", resultado.numerador, resultado.denominador);      
+        }       
+        else
+        {
+            resultado = divideRac(v1, v2);
+            printf("%d/%d = ", resultado.numerador, resultado.denominador);
+            resultado = simplificaRac(resultado);
+            printf("%d/%d\n", resultado.numerador, resultado.denominador);
+        }
+    }
+     
+    return 0;
+}
