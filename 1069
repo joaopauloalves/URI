@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+ 
+ 
+int main()
+{
+    int n, j, abre, fechar, cont;
+    char esc[1001];
+     
+    scanf("%d",&n);
+     
+    for(cont = 0; cont < n; cont++)
+    {
+            scanf("%s",esc);
+     
+            j = 0;
+            abre = 0;
+            fechar = 0;
+            while(1){
+                        if(esc[j] == '\0')
+                        {
+                            break;
+                        }           
+                        if(esc[j] == '<')
+                        {
+                            abre += 1;
+                        }                       
+                        if(esc[j] == '>'){
+                                    if(abre > 0)
+                                    {
+                                           fechar += 1;
+                                           abre -= 1;
+                                    }
+                        }
+                        j++;
+            }
+            printf("%d\n", fechar);
+    }
+    return 0;
+}
